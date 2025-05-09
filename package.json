@@ -2,9 +2,9 @@
   "name": "com.urt3d.sdk",
   "version": "1.0.0",
   "displayName": "URT3D SDK",
-  "description": "URT3D SDK for Unity",
+  "description": "The URT3D SDK for Unity enables developers to dynamically load and manipulate 3D content and behaviors at runtime.\n\nURT3D is a cross-platform, cross-engine format - allowing the same assets to work seamlessly across Unity, Unreal Engine, Godot, and ThreeJS. It supports PC, Mac, Android, and iOS platforms. This SDK provides asset management for local and remote loading, an extensible trait system for adding functionality, a runtime script interpreter for dynamic behaviors, custom editor tools, and comprehensive documentation.",
   "unity": "6000.0",
-  "documentationUrl": "https://github.com/URT3D/urt3d-sdk_unity",
+  "documentationUrl": "https://github.com/URT3D/urt3d-sdk_unity/blob/main/Documentation/index.md",
   "changelogUrl": "https://github.com/URT3D/urt3d-sdk_unity/blob/main/CHANGELOG.md",
   "licensesUrl": "https://github.com/URT3D/urt3d-sdk_unity/blob/main/LICENSE.md",
   "dependencies": {

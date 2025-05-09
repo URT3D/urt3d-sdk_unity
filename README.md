@@ -201,4 +201,4 @@ Sample content:
 
 ## Support
 
-For support, please visit [URT3D Support](https://urt3d.com/support) or contact us at [support@urt3d.com](mailto:support@urt3d.com).
+For support, please visit [URT3D Support](https://urt3d.com) or contact us at [info@urt3d.com](mailto:info@urt3d.com).

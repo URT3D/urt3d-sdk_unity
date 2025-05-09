@@ -58,7 +58,7 @@ namespace Urt3d.Utilities
         /// </summary>
         /// <param name="routine"></param>
         /// <returns></returns>
-        public static Coroutine StartCoroutine(IEnumerator routine)
+        public new static Coroutine StartCoroutine(IEnumerator routine)
         {
             return ((MonoBehaviour)Instance).StartCoroutine(routine);
         }
@@ -68,7 +68,7 @@ namespace Urt3d.Utilities
         /// </summary>
         /// <param name="routine"></param>
         /// <returns></returns>
-        public static void StopCoroutine(Coroutine routine)
+        public new static void StopCoroutine(Coroutine routine)
         {
             ((MonoBehaviour)Instance).StopCoroutine(routine);
         }

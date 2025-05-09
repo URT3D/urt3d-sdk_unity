@@ -1,0 +1,16 @@
+{
+    "name": "Urt3d.Samples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7fbe871f7a3bb4fb08059c62f4fa331e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

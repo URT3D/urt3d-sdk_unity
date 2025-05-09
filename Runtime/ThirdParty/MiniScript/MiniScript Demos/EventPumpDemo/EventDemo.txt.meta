@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a4cfc1430ecf64ec2a9e00ace5e760fc
+timeCreated: 1490675726
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 87926
+  packageName: MiniScript
+  packageVersion: 1.5
+  assetPath: Assets/MiniScript/MiniScript Demos/EventPumpDemo/EventDemo.txt
+  uploadId: 340911

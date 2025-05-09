@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 49446ee8b4abe4bca8520237f38a2269
+timeCreated: 1447360649
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 87926
+  packageName: MiniScript
+  packageVersion: 1.5
+  assetPath: Assets/MiniScript/MiniScript Demos/MiniScript Demo Scene.unity
+  uploadId: 340911

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e367c8f8704144d0ba005d59992a1857
+timeCreated: 1450149648
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 87926
+  packageName: MiniScript
+  packageVersion: 1.5
+  assetPath: Assets/MiniScript/MiniScript Demos/RoboReindeer/Art/Materials/snow.mat
+  uploadId: 340911

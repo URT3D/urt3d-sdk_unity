@@ -1,0 +1,19 @@
+{
+    "name": "Urt3d.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7fbe871f7a3bb4fb08059c62f4fa331e",
+        "GUID:478a2357cc57436488a56e564b08d223"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

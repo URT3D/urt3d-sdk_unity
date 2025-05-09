@@ -1,0 +1,26 @@
+{
+  "name": "com.urt3d.sdk",
+  "version": "1.0.0",
+  "displayName": "URT3D SDK",
+  "description": "URT3D SDK for Unity",
+  "unity": "6000.0",
+  "documentationUrl": "https://github.com/URT3D/urt3d-sdk_unity",
+  "changelogUrl": "https://github.com/URT3D/urt3d-sdk_unity/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/URT3D/urt3d-sdk_unity/blob/main/LICENSE.md",
+  "dependencies": {
+    "com.unity.cloud.gltfast": "6.12.1",
+    "com.unity.editorcoroutines": "1.0.0",
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.unity.sharp-zip-lib": "1.3.9"
+  },
+  "keywords": [
+    "urt3d",
+    "sdk",
+    "3d"
+  ],
+  "author": {
+    "name": "URT3D",
+    "email": "info@urt3d.com",
+    "url": "https://urt3d.com"
+  }
+}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5e03e3d5a0d074e25a26659d90318610
+timeCreated: 1450237519
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 87926
+  packageName: MiniScript
+  packageVersion: 1.5
+  assetPath: Assets/MiniScript/MiniScript Demos/RoboReindeer/Prefabs/Snowball.prefab
+  uploadId: 340911

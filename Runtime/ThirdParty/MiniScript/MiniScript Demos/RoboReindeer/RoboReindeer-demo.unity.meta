@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2631619881c3740f8b9ea1362fba987e
+timeCreated: 1450149879
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 87926
+  packageName: MiniScript
+  packageVersion: 1.5
+  assetPath: Assets/MiniScript/MiniScript Demos/RoboReindeer/RoboReindeer-demo.unity
+  uploadId: 340911

@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 #if UNITY_EDITOR
 using Unity.EditorCoroutines.Editor;
+using UnityEditor;
 #endif
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -61,7 +62,20 @@ namespace Urt3d.Utilities
         /// </summary>
         public static string AppKey
         {
-            get => Configuration.Instance.AppKey;
+            get
+            {
+                if (string.IsNullOrEmpty(Configuration.Instance.AppKey))
+                {
+                    const string msg = "Failed to locate a valid URT3D App Key. " +
+                                       "This is required for network operations (Create, Decrypt, Delete, Download, and Upload). " +
+                                       "Please configure one via:\n\nMain Menu → URT3D → Configure";
+#if UNITY_EDITOR
+                    EditorUtility.DisplayDialog("Missing App Key", msg, "Okay"); 
+#endif
+                    Log.Error(msg);
+                }
+                return Configuration.Instance.AppKey;   
+            }
             set => Configuration.Instance.AppKey = value;
         }
 

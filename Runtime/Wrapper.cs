@@ -516,6 +516,12 @@ namespace Urt3d
             // Clear previous
             Asset?.Destroy();
 
+            // Ensure a clean hierarchy
+            foreach (Transform child in transform)
+            {
+                GameObjectUtils.Destroy(child.gameObject);
+            }
+
             // Wait for start
             yield return new WaitUntil(() => _hasStarted);
 
@@ -525,8 +531,7 @@ namespace Urt3d
             // Validate result
             if (task.IsFaulted)
             {
-                Log.Exception(task.Exception);
-                Debug.LogError($"[URT3D] Asset loading failed for '{name}': {task.Exception.Message}");
+                Log.Error($"Failed to construct URT3D Asset for {name}: {task.Exception.Message}");
                 yield break;
             }
 
@@ -534,9 +539,7 @@ namespace Urt3d
             _asset = task.Result;
             if (_asset == null)
             {
-                string errorMsg = $"Failed to instantiate URT3D Asset for {name}";
-                Log.Exception(errorMsg);
-                Debug.LogError($"[URT3D] {errorMsg}");
+                Log.Error($"Failed to instantiate URT3D Asset for {name}: {task.Exception.Message}");
                 yield break;
             }
 
@@ -594,6 +597,23 @@ namespace Urt3d
             Reload();
             _hasStarted = true;
         }
+
+        /// <summary>
+        /// Validate hierarchy relative to URT3D assumptions.
+        /// </summary>
+        private void Update()
+        {
+            if (_lastChildCount == transform.childCount) return;
+            _lastChildCount = transform.childCount;
+
+            if (!_isLoading && transform.childCount != 1)
+            {
+                Log.Error($"Detected direct-modification of URT3D Asset wrapper: {name}, this is not allowed!\n" +
+                          $" • If parenting is desired, use constraints rather than modifying the Actor/GameObject hierarchy.\n" +
+                          $" • If destruction is desired, do so on the URT3D Asset itself (rather than on the Actor/GameObject).");
+            }
+        }
+        private int _lastChildCount = 0;
 
         #endregion
     }

@@ -75,42 +75,7 @@ namespace Urt3d
         /// </summary>
         public void Destroy()
         {
-            // Sanity check the game object
-            if (_gameObject == null) return;
-
-            if (Application.isPlaying)
-            {
-                // Modified materials must be manually purged!
-                var renderers = _gameObject.GetComponentsInChildren<Renderer>();
-                foreach (var renderer in renderers)
-                {
-                    var materials = renderer.materials; // These are instanced materials (copies)
-                    var materialsShared = renderer.sharedMaterials; // These are the originals from the asset
-
-                    if (materials.Length != materialsShared.Length)
-                    {
-                        Log.Debug($"Unexpected mismatch between and materials and sharedMaterials for Actor: {_gameObject.name}");
-                        continue;
-                    }
-
-                    // Manually destroy instanced materials
-                    for (var i = 0; i < materials.Length; ++i)
-                    {
-                        if (materials[i] != materialsShared[i])
-                        {
-                            GameObject.Destroy(materials[i]);
-                        }
-                    }
-                }
-
-                // Destroy game object
-                GameObject.Destroy(_gameObject);
-            }
-            else
-            {
-                // Immediately destroy game object
-                GameObject.DestroyImmediate(_gameObject);
-            }
+            GameObjectUtils.Destroy(_gameObject);
         }
 
         #endregion
@@ -124,7 +89,7 @@ namespace Urt3d
         /// <returns>GameObject associated with the given Actor.</returns>
         public static implicit operator GameObject(Actor actor)
         {
-            return actor._gameObject;
+            return actor?._gameObject;
         }
 
         #endregion
@@ -146,9 +111,6 @@ namespace Urt3d
             //
             SetName(asset.Metadata.NameInstance);
             asset.Metadata.OnNameInstanceChanged += SetName;
-
-            //
-            _gameObject.GetComponent<Bridge>()?.Initialize(asset);
         }
 
         #endregion
@@ -174,12 +136,6 @@ namespace Urt3d
 
             // Don't include Actor in saved scenes
             _gameObject.hideFlags = HideFlags.DontSave;
-
-            // Ensure that Bridge component exists
-            if (!_gameObject.GetComponent<Bridge>())
-            {
-                _gameObject.AddComponent<Bridge>();
-            }
         }
 
         #endregion
@@ -189,62 +145,5 @@ namespace Urt3d
         private readonly GameObject _gameObject;
 
         #endregion
-
-        /// <summary>
-        /// Bridge component attached to the Actor's GameObject.
-        /// Provides a link between the Unity GameObject hierarchy and the Urt3d Asset system.
-        /// Handles automatic cleanup of Assets when their Actor GameObjects are destroyed.
-        /// </summary>
-        public class Bridge : MonoBehaviour
-        {
-            private Asset _asset;
-
-            /// <summary>
-            /// Initializes the bridge component with the Asset's GUID.
-            /// Stores the GUID for later reference to find the Asset in the AssetCache.
-            /// </summary>
-            /// <param name="guid">The unique identifier of the parent Asset</param>
-            public void Initialize(Asset asset)
-            {
-                _asset = asset;
-            }
-
-            /// <summary>
-            /// Called when the GameObject is destroyed.
-            /// Automatically destroys the associated Asset when its Actor is destroyed,
-            /// maintaining the lifecycle relationship between Visual and Data representations.
-            /// </summary>
-            private void OnDestroy()
-            {
-                _asset?.Destroy();
-            }
-
-#if UNITY_EDITOR
-            /// <summary>
-            /// Watch for scene hierarchy changes to detected destruction when not in Play mode.
-            /// </summary>
-            private Bridge()
-            {
-                UnityEditor.EditorApplication.hierarchyChanged += OnHierarchyChanged;
-            }
-            /// <summary>
-            /// Deregister for all subscribed events.
-            /// </summary>
-            ~Bridge()
-            {
-                UnityEditor.EditorApplication.hierarchyChanged -= OnHierarchyChanged;
-            }
-            /// <summary>
-            /// Process destruction when not in Play mode (since OnDestroy doesn't fire in Edit mode).
-            /// </summary>
-            private void OnHierarchyChanged()
-            {
-                if (this == null)
-                {
-                    OnDestroy();
-                }
-            }
-#endif
-        }
     }
 }

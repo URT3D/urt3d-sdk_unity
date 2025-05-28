@@ -35,7 +35,7 @@ namespace Urt3d
                 image.name = Path.GetFileName(pathToPreviewFile);
                 return new Preview(image);
             }
-            GameObject.Destroy(image);
+            GameObjectUtils.Destroy(image);
             return null;
         }
 
@@ -62,18 +62,7 @@ namespace Urt3d
         /// </summary>
         public void Destroy()
         {
-            // Sanity check the texture
-            if (_texture == null) return;
-
-            // Destroy the texture
-            if (Application.isPlaying)
-            {
-                GameObject.Destroy(_texture);
-            }
-            else
-            {
-                GameObject.DestroyImmediate(_texture);
-            }
+            GameObjectUtils.Destroy(_texture);
         }
 
         #endregion

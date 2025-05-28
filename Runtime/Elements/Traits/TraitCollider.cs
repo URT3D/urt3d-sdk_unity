@@ -63,11 +63,7 @@ namespace Urt3d.Traits
             {
                 if (collider != null)
                 {
-#if !UNITY_EDITOR
-                    GameObject.Destroy(collider);
-#else
-                    GameObject.DestroyImmediate(collider);
-#endif
+                    GameObjectUtils.Destroy(collider);
                 }
             }
 

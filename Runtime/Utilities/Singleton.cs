@@ -139,6 +139,7 @@ namespace Urt3d.Utilities
                     // Create new instance
                     s_parent = new GameObject(name)
                     {
+                        // Don't include Singleton in saved scenes
                         hideFlags = HideFlags.DontSave
                     }.transform;
                     return s_parent;

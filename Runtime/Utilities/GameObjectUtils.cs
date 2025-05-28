@@ -1,31 +1,106 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-#if UNITY_EDITOR
 using Unity.EditorCoroutines.Editor;
-#endif
+using UnityEngine;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Urt3d.Utilities
-#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     /// <summary>
-    /// This is a base class for MonoBehaviours that need to run Coroutines in both Edit and Play modes.
+    /// 
     /// </summary>
-    [ExecuteInEditMode]
-    public class EditPlayBridge : MonoBehaviour
+    public static class GameObjectUtils
     {
-#if !UNITY_EDITOR
+        #region Coroutine
+
         /// <summary>
-        /// Starts a coroutine in Play mode using Unity's standard coroutine system.
-        /// This simplified version is used in builds where Edit mode functionality is not needed.
+        /// 
         /// </summary>
-        /// <param name="coroutine">The coroutine to start.</param>
-        protected new void StartCoroutine(IEnumerator coroutine)
+        /// <param name="coroutine"></param>
+        /// <param name="monoBehaviour"></param>
+        public static Coroutine StartCoroutine(IEnumerator coroutine, MonoBehaviour monoBehaviour = null)
         {
-            base.StartCoroutine(coroutine);
+            if (Application.isPlaying)
+            {
+                if (monoBehaviour != null)
+                {
+                    return monoBehaviour.StartCoroutine(coroutine);
+                }
+                Log.Error($"Runtime coroutines require a parent MonoBehavior: {coroutine}");
+                return null;
+            }
+
+            var wrapper = new CoroutineWrapper(coroutine);
+            if (monoBehaviour == null)
+            {
+                EditorCoroutineUtility.StartCoroutineOwnerless(EditorUpdateCoroutine(wrapper));
+                return null;
+            }
+            EditorCoroutineUtility.StartCoroutine(EditorUpdateCoroutine(wrapper), monoBehaviour);
+            return null;
         }
-#else
+
+        #endregion
+
+        #region Destroy
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="component"></param>
+        public static void Destroy(Component component)
+        {
+            if (component == null) return;
+
+            if (Application.isPlaying)
+            {
+                GameObject.Destroy(component);
+            }
+            else
+            {
+                GameObject.DestroyImmediate(component);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public static void Destroy(GameObject gameObject)
+        {
+            if (gameObject == null) return;
+
+            if (Application.isPlaying)
+            {
+                GameObject.Destroy(gameObject);
+            }
+            else
+            {
+                GameObject.DestroyImmediate(gameObject);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="texture"></param>
+        public static void Destroy(Texture2D texture)
+        {
+            if (texture == null) return;
+
+            if (Application.isPlaying)
+            {
+                GameObject.Destroy(texture);
+            }
+            else
+            {
+                GameObject.DestroyImmediate(texture);
+            }
+        }
+
+        #endregion
+
+        #region
+
         /// <summary>
         /// Internal wrapper class that manages coroutine execution in Edit mode.
         /// Implements a custom coroutine system that mimics Unity's native coroutine behavior.
@@ -70,31 +145,8 @@ namespace Urt3d.Utilities
                     return true;
                 }
 
-                //
                 stack.Pop();
                 return stack.Count > 0;
-            }
-        }
-
-        /// <summary>
-        /// Starts a coroutine in either Play or Edit mode, using the appropriate system for each context.
-        /// In Play mode, uses Unity's standard coroutine system.
-        /// In Edit mode, uses a custom implementation based on EditorApplication.update.
-        /// </summary>
-        /// <param name="coroutine">The coroutine to start.</param>
-        protected new void StartCoroutine(IEnumerator coroutine)
-        {
-            if (Application.isPlaying)
-            {
-                base.StartCoroutine(coroutine);
-            }
-            else
-            {
-                if (coroutine != null)
-                {
-                    var wrapper = new CoroutineWrapper(coroutine);
-                    EditorCoroutineUtility.StartCoroutineOwnerless(EditorUpdateCoroutine(wrapper));
-                }
             }
         }
 
@@ -114,6 +166,7 @@ namespace Urt3d.Utilities
                 yield return new EditorWaitForSeconds(1f / 60f);
             }
         }
-#endif
+
+        #endregion
     }
 }

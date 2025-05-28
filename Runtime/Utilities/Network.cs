@@ -28,7 +28,7 @@ namespace Urt3d.Utilities
     /// 3. Strongly typed result data classes for each operation
     /// </summary>
     [SuppressMessage("ReSharper", "ArrangeObjectCreationWhenTypeNotEvident")]
-    public class Network : EditPlayBridge
+    public class Network : MonoBehaviour
     {   
         #region Public Properties
 
@@ -121,7 +121,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when creation is completed, includes success status, message, and the created app key.</param>
         public void AppKeyCreate(string authToken, Action<AppKeyCreateData> callback)
         {
-            StartCoroutine(AppKeyCreateCoroutine(authToken, callback));
+            GameObjectUtils.StartCoroutine(AppKeyCreateCoroutine(authToken, callback), this);
         }
         
         /// <summary>
@@ -169,7 +169,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when deletion is completed, includes success status and message.</param>
         public void AppKeyDelete(string authToken, string appKey, Action<AppKeyDeleteData> callback)
         {
-            StartCoroutine(AppKeyDeleteCoroutine(authToken, appKey, callback));
+            GameObjectUtils.StartCoroutine(AppKeyDeleteCoroutine(authToken, appKey, callback), this);
         }
         
         /// <summary>
@@ -238,7 +238,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when retrieval is completed, includes success status, message, and the list of app keys.</param>
         public void AppKeyList(string authToken, Action<AppKeyListData> callback)
         {
-            StartCoroutine(AppKeyListCoroutine(authToken, callback));
+            GameObjectUtils.StartCoroutine(AppKeyListCoroutine(authToken, callback), this);
         }
         
         /// <summary>
@@ -324,7 +324,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when creation is completed, includes success status, message, and the GUID of the created asset.</param>
         public void Create(string actor, string preview, string type, string name, string bundledAssets, string bundledScripts, Action<CreateData> callback)
         {
-            StartCoroutine(CreateCoroutine(actor, preview, type, name, bundledAssets, bundledScripts, callback));
+            GameObjectUtils.StartCoroutine(CreateCoroutine(actor, preview, type, name, bundledAssets, bundledScripts, callback), this);
         }
         
         /// <summary>
@@ -429,7 +429,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when decryption is completed, includes success status and message.</param>
         public void Decrypt(string path, Action<DecryptData> callback)
         {
-            StartCoroutine(DecryptCoroutine(path, callback));
+            GameObjectUtils.StartCoroutine(DecryptCoroutine(path, callback), this);
         }
         
         /// <summary>
@@ -509,7 +509,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when deletion is completed, includes success status and message.</param>
         public void Delete(Guid guid, Action<DeleteData> callback)
         {
-            StartCoroutine(DeleteCoroutine(guid, callback));
+            GameObjectUtils.StartCoroutine(DeleteCoroutine(guid, callback), this);
         }
         
         /// <summary>
@@ -563,7 +563,7 @@ namespace Urt3d.Utilities
         /// <param name="onComplete">Callback when download is completed, includes success status, message, and file path.</param>
         public void Download(Guid guid, Action<float> onStatus, Action<FileData> onComplete)
         {
-            StartCoroutine(DownloadCoroutine(guid, onStatus, onComplete));
+            GameObjectUtils.StartCoroutine(DownloadCoroutine(guid, onStatus, onComplete), this);
         }
         
         /// <summary>
@@ -671,7 +671,6 @@ namespace Urt3d.Utilities
                 if (result.isValid)
                 {
                     // Store the app key and authentication token for subsequent API calls
-                    AppKey = result.appKey;
                     AuthToken = result.authToken;
                     IsAuthenticated = true;
                 }
@@ -715,7 +714,7 @@ namespace Urt3d.Utilities
         /// <param name="onComplete">Callback when upload is completed, includes success status, message, and the GUID of the uploaded asset.</param>
         public void Upload(string filePath, Action<float> onStatus, Action<UploadData> onComplete)
         {
-            StartCoroutine(UploadCoroutine(filePath, onStatus, onComplete));
+            GameObjectUtils.StartCoroutine(UploadCoroutine(filePath, onStatus, onComplete), this);
         }
         
         /// <summary>
@@ -796,7 +795,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when validation is completed, includes success status and message.</param>
         public void Validate(Action<ValidateData> callback)
         {
-            StartCoroutine(ValidateCoroutine(callback));
+            GameObjectUtils.StartCoroutine(ValidateCoroutine(callback), this);
         }
         
         /// <summary>

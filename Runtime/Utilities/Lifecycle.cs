@@ -11,7 +11,7 @@ namespace Urt3d.Utilities
     /// Singleton MonoBehaviour that provides a centralized way to register callbacks
     /// for Unity's Update and LateUpdate lifecycle methods without creating additional GameObjects.
     /// </summary>
-    public class Lifecycle : EditPlayBridge
+    public class Lifecycle : MonoBehaviour
     {
         public delegate void Delegate();
 
@@ -60,7 +60,7 @@ namespace Urt3d.Utilities
         /// <returns></returns>
         public new static Coroutine StartCoroutine(IEnumerator routine)
         {
-            return ((MonoBehaviour)Instance).StartCoroutine(routine);
+            return GameObjectUtils.StartCoroutine(routine, Instance);
         }
 
         /// <summary>

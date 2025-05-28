@@ -144,11 +144,8 @@ namespace Urt3d.Scripting
                 yield return null;
             }
 
-#if UNITY_EDITOR
-            Object.DestroyImmediate(bridge);
-#else
-            Object.Destroy(bridge);
-#endif
+            // Destroy the bridge
+            GameObjectUtils.Destroy(bridge);
 
             // Remove the interpreter
             _interpreters.Remove(script.Guid);

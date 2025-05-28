@@ -21,7 +21,7 @@ namespace Urt3d.Utilities
     /// Provides static methods to log different types of messages to the Unity console.
     /// </summary>
     [ExecuteInEditMode]
-    public class Logger : EditPlayBridge
+    public class Logger : MonoBehaviour
     {
         /// <summary>
         /// Logs an informational message to the Unity console.

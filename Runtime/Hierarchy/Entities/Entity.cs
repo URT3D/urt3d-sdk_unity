@@ -29,6 +29,7 @@ namespace Urt3d.Entities
             AddTrait(new TraitRotation3d(this));
             AddTrait(new TraitScale3d(this));
 
+            AddTrait(new TraitCollider(this));
             AddTrait(new TraitIsActive(this));
             AddTrait(new TraitUsePhysics(this));
             AddTrait(new TraitUsePhysicsHiFi(this));

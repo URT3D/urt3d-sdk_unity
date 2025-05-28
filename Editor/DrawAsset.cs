@@ -69,6 +69,16 @@ namespace Urt3d.Editor
                         floatParam.Value = newValue;
                     }
                 }
+                // Enum parameters - EnumPopup
+                else if (param.ValueObject is Enum enumParam)
+                {
+                    var newValue = EditorGUILayout.EnumPopup(enumParam);
+                    if (!Equals(enumParam, newValue))
+                    {
+                        SetDirty();
+                        param.ValueObject = newValue;
+                    }
+                }
                 // Boolean parameters - Toggle checkbox
                 else if (param is Param<bool> boolParam)
                 {

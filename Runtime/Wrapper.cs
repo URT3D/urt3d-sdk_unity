@@ -553,7 +553,7 @@ namespace Urt3d
 
             // Adjust hierarchy
             GameObject go = Asset.Actor;
-            go.transform.SetParent(transform);
+            go.transform.SetParent(transform, false);
 
             // Update GUID property to match Asset definition
             Guid = Asset.Metadata.GuidDefinition;

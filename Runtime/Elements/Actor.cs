@@ -49,22 +49,6 @@ namespace Urt3d
                 return new Actor(new GameObject());
             }
 
-            // Remove superfluous hierarchy
-            if (go.transform.childCount == 1)
-            {
-                var tmp = go.transform.GetChild(0).gameObject;
-                tmp.transform.parent = null;
-                if (Application.isPlaying)
-                {
-                    GameObject.Destroy(go);
-                }
-                else
-                {
-                    GameObject.DestroyImmediate(go);
-                }
-                go = tmp;
-            }
-
             return new Actor(go);
         }
 

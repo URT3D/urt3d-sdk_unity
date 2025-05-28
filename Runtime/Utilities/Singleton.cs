@@ -137,8 +137,10 @@ namespace Urt3d.Utilities
                     }
 
                     // Create new instance
-                    go = new GameObject(name);
-                    s_parent = go.transform;
+                    s_parent = new GameObject(name)
+                    {
+                        hideFlags = HideFlags.DontSave
+                    }.transform;
                     return s_parent;
                 }
             }

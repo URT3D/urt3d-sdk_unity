@@ -64,7 +64,7 @@ namespace Urt3d
             {
                 if (action.IsFaulted)
                 {
-                    Debug.LogException(action.Exception);
+                    Log.Exception(action.Exception);
                 }
                 callback?.Invoke(action.Result);
             }, TaskScheduler.FromCurrentSynchronizationContext());

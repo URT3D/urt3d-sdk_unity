@@ -355,7 +355,7 @@ namespace Urt3d.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError($"Error reading file: {ex.Message}");
+                    Log.Error($"Error reading file: {ex.Message}");
                 }
             }
 
@@ -369,13 +369,13 @@ namespace Urt3d.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError($"Error reading file: {ex.Message}");
+                    Log.Error($"Error reading file: {ex.Message}");
                 }
             }
 
             if(actorData == null || previewData == null)
             {
-                Debug.LogError("Invalid actor and/or preview data found.");
+                Log.Error("Invalid actor and/or preview data found.");
                 yield break;
             }
 
@@ -394,13 +394,9 @@ namespace Urt3d.Utilities
                 //NO-OP
             }, (CreateData data)=>
             {
-                if (data.isValid)
+                if (!data.isValid)
                 {
-                    Debug.Log(data.message);
-                }
-                else
-                {
-                    Debug.LogError(data.message);
+                    Log.Error(data.message);
                 }
                 callback?.Invoke(data);
             });
@@ -640,13 +636,7 @@ namespace Urt3d.Utilities
         /// <param name="callback">Callback when authentication is completed, includes success status, message, app key, and auth token.</param>
         public void Login(string username, string password, Action<LoginData> callback)
         {
-#if UNITY_EDITOR
-            Debug.Log($"Login Process Triggered");
-            EditorCoroutineUtility.StartCoroutineOwnerless(LoginCoroutine(username, password, callback));
-            Debug.Log($"Login Process Done");
-#else
-            StartCoroutine(LoginCoroutine(username, password, callback));
-#endif
+            GameObjectUtils.StartCoroutine(LoginCoroutine(username, password, callback));
         }
         
         /// <summary>
@@ -924,7 +914,6 @@ namespace Urt3d.Utilities
                 {
                     onStatus?.Invoke(www.uploadProgress);
                 });
-                Debug.Log($"Raw response data: \n{uri}\n{www.result}\n{www.downloadHandler.text}\n{GetError(www)}");
                 
                 // Was the server processing successful?
                 if (www.result == UnityWebRequest.Result.Success)

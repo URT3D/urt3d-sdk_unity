@@ -97,7 +97,7 @@ namespace Urt3d.Utilities
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(e);
+                    Log.Exception(e);
                     _onUpdate.Remove(del);
                 }
             }
@@ -117,7 +117,7 @@ namespace Urt3d.Utilities
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(e);
+                    Log.Exception(e);
                     _onLateUpdate.Remove(del);
                 }
             }

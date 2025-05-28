@@ -275,7 +275,7 @@ namespace Urt3d
             
             if (_asset == null)
             {
-                Debug.LogWarning("Cannot initialize script engine: Asset is not loaded");
+                Log.Warning("Cannot initialize script engine: Asset is not loaded");
                 return false;
             }
             
@@ -290,7 +290,7 @@ namespace Urt3d
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Failed to initialize script engine: {ex.Message}");
+                Log.Error($"Failed to initialize script engine: {ex.Message}");
                 _scriptEngine = null;
                 _scriptsReady = false;
                 return false;
@@ -306,19 +306,19 @@ namespace Urt3d
         {
             if (script == null)
             {
-                Debug.LogError("Cannot run script: Script is null");
+                Log.Error("Cannot run script: Script is null");
                 return false;
             }
             
             if (!_scriptsReady && !InitializeScriptEngine())
             {
-                Debug.LogWarning("Cannot run script: Script engine is not initialized");
+                Log.Warning("Cannot run script: Script engine is not initialized");
                 return false;
             }
             
             if (!ShouldExecuteInCurrentMode())
             {
-                Debug.LogWarning("Cannot run script: Script execution is not enabled in current mode");
+                Log.Warning("Cannot run script: Script execution is not enabled in current mode");
                 return false;
             }
             
@@ -328,7 +328,7 @@ namespace Urt3d
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error executing script: {ex.Message}");
+                Log.Error($"Error executing script: {ex.Message}");
                 return false;
             }
         }
@@ -346,13 +346,13 @@ namespace Urt3d
             
             if (!_scriptsReady && !InitializeScriptEngine())
             {
-                Debug.LogWarning("Cannot run scripts: Script engine is not initialized");
+                Log.Warning("Cannot run scripts: Script engine is not initialized");
                 return;
             }
             
             if (!ShouldExecuteInCurrentMode())
             {
-                Debug.LogWarning("Cannot run scripts: Script execution is not enabled in current mode");
+                Log.Warning("Cannot run scripts: Script execution is not enabled in current mode");
                 return;
             }
             
@@ -362,7 +362,7 @@ namespace Urt3d
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error executing scripts: {ex.Message}");
+                Log.Error($"Error executing scripts: {ex.Message}");
                 _scriptsReady = false;
                 _scriptEngine = null;
             }
@@ -381,13 +381,13 @@ namespace Urt3d
             
             if (!_scriptsReady && !InitializeScriptEngine())
             {
-                Debug.LogWarning("Cannot trigger event: Script engine is not initialized");
+                Log.Warning("Cannot trigger event: Script engine is not initialized");
                 return;
             }
             
             if (!ShouldExecuteInCurrentMode())
             {
-                Debug.LogWarning("Cannot trigger event: Script execution is not enabled in current mode");
+                Log.Warning("Cannot trigger event: Script execution is not enabled in current mode");
                 return;
             }
             
@@ -397,7 +397,7 @@ namespace Urt3d
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error triggering event: {ex.Message}");
+                Log.Error($"Error triggering event: {ex.Message}");
                 _scriptsReady = false;
                 _scriptEngine = null;
             }
@@ -426,7 +426,7 @@ namespace Urt3d
         {
             if (!success && !string.IsNullOrEmpty(errorMessage))
             {
-                Debug.LogError($"Script execution failed: {errorMessage}");
+                Log.Error($"Script execution failed: {errorMessage}");
             }
         }
         
@@ -438,7 +438,7 @@ namespace Urt3d
         private void HandleScriptOutput(Guid guid, string output)
         {
             // Log output to console
-            Debug.Log($"[Script Output] {output}");
+            Log.Debug($"[Script Output] {output}");
         }
         
         /// <summary>

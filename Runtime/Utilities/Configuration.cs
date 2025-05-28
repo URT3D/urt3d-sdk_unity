@@ -40,7 +40,7 @@ namespace Urt3d.Utilities
                         UnityEditor.AssetDatabase.SaveAssets();
                         UnityEditor.AssetDatabase.Refresh();
 #endif
-                        Debug.LogWarning("No Urt3dConfig found in Resources folder. Using default configuration.");
+                        Log.Warning("No Urt3dConfig found in Resources folder. Using default configuration.");
                     }
                 }
                 return _instance;

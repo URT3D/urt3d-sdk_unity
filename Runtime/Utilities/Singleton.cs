@@ -88,7 +88,7 @@ namespace Urt3d.Utilities
             var scene = SceneManager.GetActiveScene();
             if (!scene.isLoaded)
             {
-                Debug.LogWarning($"Active scene is not loaded: {scene}");
+                Log.Warning($"Active scene is not loaded: {scene}");
                 return null;
             }
 
